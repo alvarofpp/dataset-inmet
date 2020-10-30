@@ -14,7 +14,7 @@ list_dirs.sort()
 list_files.sort()
 data_extractor = DataExtractor()
 metadata_extractor = MetadataExtractor()
-year_start = 2019
+year_start = 2000
 
 for dirname in list_dirs:
     if int(dirname) < year_start:
