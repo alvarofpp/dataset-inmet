@@ -1,17 +1,20 @@
+import numpy as np
+
+
 def clean_date(value):
     return value.replace('/', '-')
 
 
 def clean_hour(value):
-    if 'UTF' in value:
-        value = '{}:{}'.format(value[0:2], value[3:5])
+    if 'UTC' in value:
+        value = '{}:{}'.format(value[0:2], value[2:4])
     return value
 
 
 def clean_numeric(value):
     value = str(value)
     if value in ['-9999', 'F', 'nan']:
-        return 0
+        return np.nan
 
     value = value.replace(',', '.')
 
