@@ -1,0 +1,12 @@
+---
+version: '3.8'
+
+services:
+  dataset-inmet:
+    build:
+      context: .
+    image: alvarofpp/dataset-inmet
+    container_name: dataset-inmet
+    user: "${UID_GID}"
+    volumes:
+      - .:/app
