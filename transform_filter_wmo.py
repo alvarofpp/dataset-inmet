@@ -8,10 +8,14 @@ code_wmo = 'A304'  # Natal-RN
 
 list_files = []
 for (dirpath, dirnames, filenames) in os.walk(main_dir):
-    list_files += [os.path.join(dirpath, file) for file in filenames]
+    list_files += [os.path.join(dirpath, filename) for filename in filenames if filename.endswith('.csv')]
 dfs = []
 
-for filename in tqdm(list_files):
+list_files.sort()
+
+progress_bar = tqdm(list_files)
+for filename in progress_bar:
+    progress_bar.set_description("Processing {}".format(filename))
     df_now = pd.read_csv(filename)
     dfs.append(df_now[df_now['code_wmo'] == code_wmo])
     del(df_now)

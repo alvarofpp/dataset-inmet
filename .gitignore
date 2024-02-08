@@ -1,3 +1,13 @@
 venv/
 .idea/
 __pycache__
+
+*.zip
+*.CSV
+*.csv
+
+!data/filter_wmo/*.csv
+!data/per_year/.gitkeep
+!data/source/.gitkeep
+!data/unzip/.gitkeep
+!data/metadata.csv
