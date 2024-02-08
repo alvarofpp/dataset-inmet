@@ -34,8 +34,6 @@ class MetadataExtractor:
 
             self.data['foundation_date'].append(data_fundacao)
     
-            f.close()
-    
         return {
             'region': self.data['region'][-1],
             'federal_unit': self.data['federal_unit'][-1],

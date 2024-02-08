@@ -1,5 +1,10 @@
+import gc
 import pandas as pd
-from extracts.clean_functions import *
+from extracts.clean_functions import (
+    clean_date,
+    clean_hour,
+    clean_numeric,
+)
 
 
 class DataExtractor:
@@ -30,12 +35,16 @@ class DataExtractor:
             'VENTO, VELOCIDADE HORARIA (m/s)': 'wind_speed',
         }
 
+    def clear(self) -> None:
+        del self.data
+        gc.collect()
+        self.data = []
+
     def extract(self, filename: str, metadata: dict) -> bool:
         data = pd.read_csv(filename, sep=';', skiprows=8, encoding='ISO-8859-1')
         data = data.rename(columns=self.columns)
         data.drop(data.columns[len(data.columns) - 1], axis=1, inplace=True)
         data['code_wmo'] = metadata['code_wmo']
-
         data['date'] = data['date'].map(clean_date)
         data['hour'] = data['hour'].map(clean_hour)
         numeric_cols = [
@@ -60,6 +69,7 @@ class DataExtractor:
         for numeric_col in numeric_cols:
             data[numeric_col] = data[numeric_col].map(clean_numeric)
 
-        self.data.append(data)
+        self.data.append(data.copy())
+        del data
 
         return True

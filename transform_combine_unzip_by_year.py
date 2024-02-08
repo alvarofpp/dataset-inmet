@@ -3,7 +3,6 @@ import pandas as pd
 from tqdm import tqdm
 from extracts import DataExtractor, MetadataExtractor
 
-
 list_dirs = []
 list_files = []
 for (dirpath, dirnames, filenames) in os.walk('data/unzip'):
@@ -12,15 +11,18 @@ for (dirpath, dirnames, filenames) in os.walk('data/unzip'):
 
 list_dirs.sort()
 list_files.sort()
-data_extractor = DataExtractor()
+
 metadata_extractor = MetadataExtractor()
+data_extractor = DataExtractor()
 year_start = 2000
 
 for dirname in list_dirs:
     if int(dirname) < year_start:
         continue
+    file_target = 'data/per_year/{}.csv'.format(dirname)
+    if os.path.exists(file_target):
+        continue
     files_by_dir = [filename for filename in list_files if dirname in filename]
-
     progress_bar = tqdm(files_by_dir)
     for filename in progress_bar:
         progress_bar.set_description("({}) Processing {}".format(dirname, filename))
@@ -29,10 +31,13 @@ for dirname in list_dirs:
 
     data_df = pd.concat(data_extractor.data)
     data_df.to_csv('data/per_year/{}.csv'.format(dirname), sep=',', encoding='utf-8', index=False)
-    data_extractor.data = []
+    del data_df
+    data_extractor.clear()
 
-metadata_df = pd.DataFrame.from_dict(metadata_extractor.data)
-metadata_df.sort_values(['foundation_date'])\
-    .drop_duplicates(subset=['code_wmo'], keep='last')\
-    .sort_values(['region', 'federal_unit', 'station'])\
-    .to_csv('data/metadata.csv', sep=',', encoding='utf-8', index=False)
+metadata_file = 'data/metadata.csv'
+if not os.path.exists(metadata_file):
+    metadata_df = pd.DataFrame.from_dict(metadata_extractor.data)
+    metadata_df.sort_values(['foundation_date'])\
+        .drop_duplicates(subset=['code_wmo'], keep='last')\
+        .sort_values(['region', 'federal_unit', 'station'])\
+        .to_csv(metadata_file, sep=',', encoding='utf-8', index=False)
