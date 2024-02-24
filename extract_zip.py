@@ -1,5 +1,6 @@
-from datetime import datetime
 import os.path
+from datetime import datetime
+
 import requests
 from tqdm import tqdm
 
@@ -16,6 +17,5 @@ for year in tqdm(range(first_year, current_year+1)):
     if os.path.exists(filename):
         continue
 
-    with requests.get(url_file) as file_response:
-        with open(filename, 'wb') as file_to_save:
-            file_to_save.write(file_response.content)
+    with requests.get(url_file) as file_response, open(filename, 'wb') as file_to_save:
+        file_to_save.write(file_response.content)

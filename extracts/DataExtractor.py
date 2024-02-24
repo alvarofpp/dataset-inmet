@@ -1,9 +1,11 @@
 import gc
+
 import pandas as pd
+
 from extracts.clean_functions import (
     clean_date,
-    clean_time,
     clean_numeric,
+    clean_time,
 )
 
 
@@ -16,17 +18,17 @@ class DataExtractor:
             'Hora UTC': 'time',
             'HORA (UTC)': 'time',
             'PRECIPITAÇÃO TOTAL, HORÁRIO (mm)': 'precipitation_total',
-            'PRESSAO ATMOSFERICA AO NIVEL DA ESTACAO, HORARIA (mB)': 'atmospheric_pressure_station_level',
-            'PRESSÃO ATMOSFERICA MAX.NA HORA ANT. (AUT) (mB)': 'atmospheric_pressure_max_before',
-            'PRESSÃO ATMOSFERICA MIN. NA HORA ANT. (AUT) (mB)': 'atmospheric_pressure_min_before',
+            'PRESSAO ATMOSFERICA AO NIVEL DA ESTACAO, HORARIA (mB)': 'atmospheric_pressure_station_level', # noqa: E501
+            'PRESSÃO ATMOSFERICA MAX.NA HORA ANT. (AUT) (mB)': 'atmospheric_pressure_max_before', # noqa: E501
+            'PRESSÃO ATMOSFERICA MIN. NA HORA ANT. (AUT) (mB)': 'atmospheric_pressure_min_before', # noqa: E501
             'RADIACAO GLOBAL (Kj/m²)': 'global_radiation',
             'RADIACAO GLOBAL (KJ/m²)': 'global_radiation',
             'TEMPERATURA DO AR - BULBO SECO, HORARIA (°C)': 'temperature_air_dry_bulb',
             'TEMPERATURA DO PONTO DE ORVALHO (°C)': 'temperature_dew',
             'TEMPERATURA MÁXIMA NA HORA ANT. (AUT) (°C)': 'temperature_max_before',
             'TEMPERATURA MÍNIMA NA HORA ANT. (AUT) (°C)': 'temperature_min_before',
-            'TEMPERATURA ORVALHO MAX. NA HORA ANT. (AUT) (°C)': 'temperature_dew_max_before',
-            'TEMPERATURA ORVALHO MIN. NA HORA ANT. (AUT) (°C)': 'temperature_dew_min_before',
+            'TEMPERATURA ORVALHO MAX. NA HORA ANT. (AUT) (°C)': 'temperature_dew_max_before', # noqa: E501
+            'TEMPERATURA ORVALHO MIN. NA HORA ANT. (AUT) (°C)': 'temperature_dew_min_before', # noqa: E501
             'UMIDADE REL. MAX. NA HORA ANT. (AUT) (%)': 'humidity_relative_max_before',
             'UMIDADE REL. MIN. NA HORA ANT. (AUT) (%)': 'humidity_relative_min_before',
             'UMIDADE RELATIVA DO AR, HORARIA (%)': 'humidity_relative_air',

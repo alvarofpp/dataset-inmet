@@ -1,6 +1,8 @@
 import os
+
 import pandas as pd
 from tqdm import tqdm
+
 from extracts import DataExtractor, MetadataExtractor
 
 list_dirs = []
@@ -19,18 +21,23 @@ year_start = 2000
 for dirname in list_dirs:
     if int(dirname) < year_start:
         continue
-    file_target = 'data/per_year/{}.csv'.format(dirname)
+    file_target = f'data/per_year/{dirname}.csv'
     if os.path.exists(file_target):
         continue
     files_by_dir = [filename for filename in list_files if dirname in filename]
     progress_bar = tqdm(files_by_dir)
     for filename in progress_bar:
-        progress_bar.set_description("({}) Processing {}".format(dirname, filename))
+        progress_bar.set_description(f'({dirname}) Processing {filename}')
         metadata = metadata_extractor.extract(filename)
         data_extractor.extract(filename, metadata)
 
     data_df = pd.concat(data_extractor.data)
-    data_df.to_csv('data/per_year/{}.csv'.format(dirname), sep=',', encoding='utf-8', index=False)
+    data_df.to_csv(
+        f'data/per_year/{dirname}.csv',
+        sep=',',
+        encoding='utf-8',
+        index=False
+    )
     del data_df
     data_extractor.clear()
 

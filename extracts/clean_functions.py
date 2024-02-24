@@ -7,7 +7,7 @@ def clean_date(value):
 
 def clean_time(value):
     if 'UTC' in value:
-        value = '{}:{}'.format(value[0:2], value[2:4])
+        value = f'{value[0:2]}:{value[2:4]}'
     return value
 
 
@@ -20,6 +20,5 @@ def clean_numeric(value):
 
     if '.' in value:
         return float(value)
-
 
     return int(value)

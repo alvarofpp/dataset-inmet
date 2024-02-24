@@ -1,11 +1,15 @@
 import os.path
-from tqdm import tqdm
 import zipfile
+
+from tqdm import tqdm
 
 path_source = 'data/source/'
 path_target = 'data/unzip/'
 
-zip_filenames = [filename for filename in os.listdir(path_source) if filename.endswith('.zip') ]
+zip_filenames = [
+    filename for filename in os.listdir(path_source)
+    if filename.endswith('.zip')
+]
 for zip_filename in tqdm(zip_filenames):
     year = int(zip_filename.replace('.zip', ''))
     if os.path.exists(f'{path_target}{year}'):
