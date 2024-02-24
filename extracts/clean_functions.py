@@ -5,7 +5,7 @@ def clean_date(value):
     return value.replace('/', '-')
 
 
-def clean_hour(value):
+def clean_time(value):
     if 'UTC' in value:
         value = '{}:{}'.format(value[0:2], value[2:4])
     return value

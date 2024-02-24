@@ -7,7 +7,7 @@ class MetadataExtractor:
             'region': [],
             'federal_unit': [],
             'station': [],
-            'code_wmo': [],
+            'wmo_code': [],
             'latitude': [],
             'longitude': [],
             'altitude': [],
@@ -21,7 +21,7 @@ class MetadataExtractor:
             self.data['region'].append(self._extract_value_from_csv_row(next(reader)))
             self.data['federal_unit'].append(self._extract_value_from_csv_row(next(reader)))
             self.data['station'].append(self._extract_value_from_csv_row(next(reader)))
-            self.data['code_wmo'].append(self._extract_value_from_csv_row(next(reader)))
+            self.data['wmo_code'].append(self._extract_value_from_csv_row(next(reader)))
             self.data['latitude'].append(self._extract_value_from_csv_row(next(reader)))
             self.data['longitude'].append(self._extract_value_from_csv_row(next(reader)))
             self.data['altitude'].append(self._extract_value_from_csv_row(next(reader)))
@@ -38,7 +38,7 @@ class MetadataExtractor:
             'region': self.data['region'][-1],
             'federal_unit': self.data['federal_unit'][-1],
             'station': self.data['station'][-1],
-            'code_wmo': self.data['code_wmo'][-1],
+            'wmo_code': self.data['wmo_code'][-1],
             'latitude': self.data['latitude'][-1],
             'longitude': self.data['longitude'][-1],
             'altitude': self.data['altitude'][-1],
